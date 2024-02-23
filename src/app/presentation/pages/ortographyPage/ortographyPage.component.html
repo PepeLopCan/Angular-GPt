@@ -8,7 +8,11 @@
 
 @for (message of messages(); track $index) {
   @if ( message.isGpt) {
-    <app-chat-message [text]="message.text"></app-chat-message>
+    <app-gtp-message-orthography
+    [text]="message.text"
+    [errors]="message.info!.errors"
+    [userScore]="message.info!.userScore"
+    ></app-gtp-message-orthography>
   }@else {
     <app-my-message [text]="message.text"></app-my-message>
   }
@@ -25,12 +29,8 @@
 </div>
   </div>
 
-<!--   <app-text-message-box placeholder="Escribe aqui lo que deseas" (onMessage)="handleMessage($event)"></app-text-message-box>
- -->
-<!--  <app-text-message-box-file placeholder="Escribe aqui lo que deseas" (onMessage)="handleMessageWithFile($event)"></app-text-message-box-file>
- --> <app-text-message-box-select placeholder="Escribe aqui lo que deseas"
-  [options]="[{id: '1', text: '1'}, {id: '2', text: '2'}]"
+   <app-text-message-box placeholder="Escribe aqui lo que deseas" [disableCorrections]="true" (onMessage)="handleMessage($event)"></app-text-message-box>
 
- (onMessage)="handleMessageWithSelect($event)"></app-text-message-box-select>
+
 
 </div>
