@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output,inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -7,7 +8,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   templateUrl: './textMessageBox.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,6 +17,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 export class TextMessageBoxComponent {
 
 @Input()  placeholder:string = ''
+@Input() disableCorrections:boolean = true;
 @Output() onMessage = new EventEmitter<string>();
 
 public fb = inject(FormBuilder);
@@ -30,6 +33,7 @@ handleSubmit(){
   const { prompt } = this.form.value;
   this.onMessage.emit(prompt ?? '');
   this.form.reset();
+
 }
 
  }
