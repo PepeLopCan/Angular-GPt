@@ -1,5 +1,4 @@
 import { environment } from "../../../../environments/environment"
-import type { OrthographyResponse } from "../../../interfaces/orthography.response";
 
 export const textToAudioUseCase = async ( prompt:string,voice:string) => {
 
