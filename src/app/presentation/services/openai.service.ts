@@ -3,27 +3,32 @@ import { from } from 'rxjs';
 import { orthographyUseCase } from '../../core/use-cases/orthography/orthography.use-case';
 import { prosConsUseCase } from '../../core/use-cases/pros-cons/pros-cons-use-case';
 import { prosConsStreamUseCase } from '../../core/use-cases/pros-cons/pros-cons-stream-use-case';
+import { translateUseCase } from '../../core/use-cases/translate/translate-text.use-case';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class OpenAiServie {
   constructor() { }
 
 
-  checkOrthography(prompt:string) {
+  checkOrthography(prompt: string) {
 
-      return from( orthographyUseCase(prompt)); // Usamos el from para trnasformar la Promise que tenemos en la funcion orthographyUseCase() a Observable
+    return from(orthographyUseCase(prompt)); // Usamos el from para trnasformar la Promise que tenemos en la funcion orthographyUseCase() a Observable
 
   }
 
 
-  prosConsDiscusser(prompt:string) {
+  prosConsDiscusser(prompt: string) {
 
-    return from( prosConsUseCase(prompt))
+    return from(prosConsUseCase(prompt))
   }
 
 
-  prosConsStreamDiscusser( prompt: string, abortSignal: AbortSignal ) {
-    return prosConsStreamUseCase(prompt, abortSignal );
+  prosConsStreamDiscusser(prompt: string, abortSignal: AbortSignal) {
+    return prosConsStreamUseCase(prompt, abortSignal);
   }
 
+
+  translateText(prompt: string, lang: string) {
+    return from(translateUseCase(prompt, lang))
+  }
 }
